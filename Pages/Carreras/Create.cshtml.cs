@@ -4,6 +4,7 @@ using SistemaAcademico.Data;
 using SistemaAcademico.Models;
 
 
+
 namespace SistemaAcademico.Pages.Carreras
 {
     public class CreateModel : PageModel
@@ -15,15 +16,13 @@ namespace SistemaAcademico.Pages.Carreras
         [BindProperty]
         public Carrera Carrera { get; set; }
         //public static List<Carrera> listacarrera = new();
-        private static int ultimoId = 0;
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            ultimoId++;
-            Carrera.Id = ultimoId;
+            Carrera.Id = DatosCompartidos.ObtenerID();
             DatosCompartidos.Carreras.Add(Carrera);
             return RedirectToPage("/Carreras/Index");
         }

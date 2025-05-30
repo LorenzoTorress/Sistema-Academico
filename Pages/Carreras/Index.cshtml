@@ -2,6 +2,7 @@
 @model SistemaAcademico.Pages.Carreras.IndexModel
 @{
 }
+<a asp-page="Create" class="btn btn-success mb-3">Agregar Carrera </a>
 @if (Model.Carreras.Count == 0)
 {
 	<p>No hay carreras cargadas</p>
@@ -13,9 +14,10 @@ else
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
-                <th>Modalidad</th>
                 <th>Duracion</th>
                 <th>TituloOtorgado</th>
+                <th>Modalidad</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +29,10 @@ else
                     <td>@carrera.Modalidad</td>
                     <td>@carrera.DuracionAnios</td>
                     <td>@carrera.TituloOtorgado</td>
+                    <td>
+                        <a asp-page="Edit" asp-route-id="@carrera.Id" class="btn btn-warning btn-sm">Editar Alumno</a>
+                        <a asp-page="Delete" asp-route-id="@carrera.Id" class="btn btn-danger btn-sm">Eliminar Alumno</a>
+                    </td>
                 </tr>
             }
         </tbody>

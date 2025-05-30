@@ -2,9 +2,10 @@
 @model SistemaAcademico.Pages.Alumnos.IndexModel
 @{
 }
+<a asp-page="Create" class="btn btn-success mb-3">Agregar Alumno </a>
 @if (Model.Alumnos.Count == 0)
 {
-    <p>No hay carreras cargadas</p>
+    <p>No hay alumnos cargados</p>
 }
 else
 {
@@ -17,6 +18,7 @@ else
                 <th>Dni</th>
                 <th>Email</th>
                 <th>Fecha De Nacimiento</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -29,6 +31,10 @@ else
                     <td>@alumno.Dni</td>
                     <td>@alumno.Email</td>
                     <td>@alumno.FechaDeNacimiento</td>
+                    <td>
+                        <a asp-page="Edit" asp-route-id="@alumno.Id" class="btn btn-warning sa">Editar Alumno</a>
+                        <a asp-page="Delete" asp-route-id="@alumno.Id" class="btn btn-danger sn">Eliminar Alumno</a>
+                    </td>
                 </tr>
             }
         </tbody>
