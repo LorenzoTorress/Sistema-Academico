@@ -3,15 +3,18 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using SistemaAcademico.Models;
 using SistemaAcademico.Data;
 using System.Security.Cryptography.X509Certificates;
+using SistemaAcademico.Helpers;
 
 namespace SistemaAcademico.Pages.Carreras
 {
     public class EditModel : PageModel
     {
+        public List<string> Modalidad { get; set; } = new();
         [BindProperty]
         public Carrera Carrera { get; set; }
         public void OnGet(int id)
         {
+            Modalidad = OpcionesModalidad.Lista;
             foreach (var c in DatosCompartidos.Carreras) 
             { 
                 if (c.Id == id)
@@ -21,6 +24,7 @@ namespace SistemaAcademico.Pages.Carreras
         }
         public IActionResult OnPost()
         {
+            Modalidad = OpcionesModalidad.Lista;
             if (!ModelState.IsValid)
             {
                 return Page();
