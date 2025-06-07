@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using SistemaAcademico.Data;
 using SistemaAcademico.Helpers;
 using SistemaAcademico.Models;
+using SistemaAcademico.Services;
 
 
 
@@ -26,8 +27,8 @@ namespace SistemaAcademico.Pages.Carreras
             {
                 return Page();
             }
-            Carrera.Id = DatosCompartidos.ObtenerID();
-            DatosCompartidos.Carreras.Add(Carrera);
+
+            ServicesCareer.AgregarCarrera(Carrera);
             return RedirectToPage("/Carreras/Index");
         }
     }
