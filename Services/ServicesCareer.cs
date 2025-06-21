@@ -6,7 +6,7 @@ namespace SistemaAcademico.Services
     public class ServicesCareer
     {
         private static string ruta = "/Data/Career.json";
-        public static string LeerArchivo()
+        public static string LeerTextoDelArchivo()
         {
             if (File.Exists(ruta))
             {
@@ -16,24 +16,34 @@ namespace SistemaAcademico.Services
         }
         public static List<Carrera> ObtenerCarreras()
         { 
-            string json = LeerArchivo();
+            string json = LeerTextoDelArchivo();
+
             var lista = JsonSerializer.Deserialize<List<Carrera>>(json);
             return lista ?? new List<Carrera>();
         }
         public static void AgregarCarrera(Carrera nuevaCarrera)
         {
-            var carrera = ObtenerCarreras();
-            nuevaCarrera.Id = ObtenerNuevoID(Carrera);
-            carrera.Add(nuevaCarrera);
-            GuardarCarrera(carrera);
-
-
+            var carreras = ObtenerCarreras();
+            nuevaCarrera.Id = ObtenerNuevoId(carreras);
+            carreras.Add(nuevaCarrera);
+            GuardarCarreras(carreras);
         }
-        public static int ObtenerId()
+        public static int ObtenerNuevoId(List<Carrera> carreras)
         {
-            var carrera = ObtenerCarreras();
-            int Id = 0;
-            Id = carrera.Last;
+            int maxId = 0;
+            foreach (var carrera in carreras)
+            {
+                if (carrera.Id > maxId)
+                {
+                    maxId = carrera.Id;
+                }
+            }
+            return maxId + 1;
+        }
+        public static void GuardarCarreras(List<Carrera> carreras) 
+        {
+            string TextoJson = JsonSerializer.Serialize(carreras);
+            File.WriteAllText(ruta, TextoJson);
         }
     }
 }
