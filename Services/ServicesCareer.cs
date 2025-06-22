@@ -45,5 +45,35 @@ namespace SistemaAcademico.Services
             string TextoJson = JsonSerializer.Serialize(carreras);
             File.WriteAllText(ruta, TextoJson);
         }
+        public static Carrera? BuscarPorId(int id)
+        {
+            var carreras = ObtenerCarreras();
+            foreach (var carrera in carreras)
+            {
+                if (carrera.Id == id)
+                {
+                    return carrera;
+                }
+            }
+            return null;
+        }
+        public static void EliminarPorId(int id)
+        {
+            var lista = ObtenerCarreras();
+            Carrera? carreraAEliminar = null;
+            foreach (var carrera in lista)
+            {
+                if (carrera.Id == id)
+                {
+                    carreraAEliminar = carrera;
+                    break;
+                }
+            }
+            if (carreraAEliminar != null)
+            {
+                lista.Remove(carreraAEliminar);
+                GuardarCarreras(lista);
+            }
+        }
     }
 }
