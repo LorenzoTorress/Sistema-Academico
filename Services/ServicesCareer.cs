@@ -48,32 +48,45 @@ namespace SistemaAcademico.Services
         public static Carrera? BuscarPorId(int id)
         {
             var carreras = ObtenerCarreras();
-            foreach (var carrera in carreras)
-            {
-                if (carrera.Id == id)
-                {
-                    return carrera;
-                }
-            }
-            return null;
+            return BuscarCarreraPorId(carreras, id);
         }
         public static void EliminarPorId(int id)
         {
             var lista = ObtenerCarreras();
-            Carrera? carreraAEliminar = null;
-            foreach (var carrera in lista)
-            {
-                if (carrera.Id == id)
-                {
-                    carreraAEliminar = carrera;
-                    break;
-                }
-            }
+            var carreraAEliminar = BuscarCarreraPorId(lista, id);
+            
             if (carreraAEliminar != null)
             {
                 lista.Remove(carreraAEliminar);
                 GuardarCarreras(lista);
             }
         }
+        public static void EditarCarrera(Carrera carreraEditada)
+        {
+            var lista = ObtenerCarreras();
+            var carrera = BuscarCarreraPorId(lista, carreraEditada.Id);
+            if (carrera != null)
+            {
+                carrera.Nombre = carreraEditada.Nombre;
+                carrera.Modalidad = carreraEditada.Modalidad;
+                carrera.DuracionAnios = carreraEditada.DuracionAnios;
+                carrera.TituloOtorgado = carreraEditada.TituloOtorgado;
+                
+                GuardarCarreras(lista);
+            }
+             
+        }
+        private static Carrera? BuscarCarreraPorId(List<Carrera> lista, int id)
+        {
+            foreach (var c in lista)
+            {
+                if (c.Id == id)
+                {
+                    return c;
+                }
+            }
+            return null;
+        }
+
     }
 }

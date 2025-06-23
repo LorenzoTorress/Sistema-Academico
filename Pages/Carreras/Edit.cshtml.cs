@@ -4,6 +4,7 @@ using SistemaAcademico.Models;
 using SistemaAcademico.Data;
 using System.Security.Cryptography.X509Certificates;
 using SistemaAcademico.Helpers;
+using SistemaAcademico.Services;
 
 namespace SistemaAcademico.Pages.Carreras
 {
@@ -11,33 +12,28 @@ namespace SistemaAcademico.Pages.Carreras
     {
         public List<string> Modalidad { get; set; } = new();
         [BindProperty]
-        public Carrera Carrera { get; set; }
+        public Carrera? Carrera { get; set; }
         public void OnGet(int id)
         {
             Modalidad = OpcionesModalidad.Lista;
-            foreach (var c in DatosCompartidos.Carreras) 
-            { 
-                if (c.Id == id)
-                    Carrera = c;
-                break;
+
+            Carrera? carrera = ServicesCareer.BuscarPorId(id);
+            if (carrera != null)
+            {
+                Carrera = carrera;
             }
         }
         public IActionResult OnPost()
         {
             Modalidad = OpcionesModalidad.Lista;
+            
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            foreach (var c in DatosCompartidos.Carreras)
-            {
-                c.Nombre = Carrera.Nombre;
-                c.DuracionAnios = Carrera.DuracionAnios;
-                c.TituloOtorgado = Carrera.TituloOtorgado;
-                c.Modalidad = Carrera.Modalidad;
-                break;
-            }
+            ServicesCareer.EditarCarrera(Carrera);
+            
             return RedirectToPage("Index");
         }
     }
