@@ -3,17 +3,23 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using SistemaAcademico.Data;
 using SistemaAcademico.Models;
 using SistemaAcademico.Services;
+using System.Transactions;
 
 namespace SistemaAcademico.Pages.Carreras
 {
     
     public class DeleteModel : PageModel
     {
+        private readonly ServicesCareer servicio;
+        public DeleteModel()
+		{
+			servicio = new ServicesCareer();
+		}
         [BindProperty]
         public Carrera Carrera { get; set; }
         public IActionResult OnGet(int id)
         {
-            var carrera = ServicesCareer.BuscarPorId(id);
+            var carrera = servicio.BuscarPorId(id);
             if (carrera == null)
             {
                 return RedirectToPage("Index");
@@ -23,7 +29,7 @@ namespace SistemaAcademico.Pages.Carreras
         }
         public IActionResult OnPost(int id) 
         {
-            ServicesCareer.EliminarPorId(id);
+            servicio.EliminarPorId(id);
             return RedirectToPage("Index");
         }
     }

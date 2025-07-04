@@ -10,6 +10,11 @@ namespace SistemaAcademico.Pages.Carreras
 {
     public class EditModel : PageModel
     {
+        private readonly ServicesCareer servicio;
+        public EditModel()
+        {
+			servicio = new ServicesCareer();
+        }
         public List<string> Modalidad { get; set; } = new();
         [BindProperty]
         public Carrera? Carrera { get; set; }
@@ -17,7 +22,7 @@ namespace SistemaAcademico.Pages.Carreras
         {
             Modalidad = OpcionesModalidad.Lista;
 
-            Carrera? carrera = ServicesCareer.BuscarPorId(id);
+            Carrera? carrera = servicio.BuscarPorId(id);
             if (carrera != null)
             {
                 Carrera = carrera;
@@ -32,7 +37,7 @@ namespace SistemaAcademico.Pages.Carreras
                 return Page();
             }
 
-            ServicesCareer.EditarCarrera(Carrera);
+            servicio.Editar(Carrera);
             
             return RedirectToPage("Index");
         }

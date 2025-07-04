@@ -4,6 +4,7 @@ using SistemaAcademico.Data;
 using SistemaAcademico.Helpers;
 using SistemaAcademico.Models;
 using SistemaAcademico.Services;
+using System.Transactions;
 
 
 
@@ -11,12 +12,17 @@ namespace SistemaAcademico.Pages.Carreras
 {
     public class CreateModel : PageModel
     {
+        private readonly ServicesCareer servicio;
+        public CreateModel()
+        {
+            servicio = new ServicesCareer();
+        }
         public List<string> Modalidad { get; set; } = new();
         public List<Carrera> carreras { get; set; } //Agregado para preguntar
         public void OnGet()
         {
             Modalidad = OpcionesModalidad.Lista;
-            carreras = ServicesCareer.ObtenerCarreras(); //Agregado para preguntar 
+            
         }
 
         [BindProperty]
@@ -29,8 +35,7 @@ namespace SistemaAcademico.Pages.Carreras
                 return Page();
             }
 
-            Carrera.Id = ServicesCareer.ObtenerNuevoId(carreras); //Agregado para preguntar
-            ServicesCareer.AgregarCarrera(Carrera);
+            servicio.Agregar(Carrera);
             return RedirectToPage("/Carreras/Index");
         }
     }
