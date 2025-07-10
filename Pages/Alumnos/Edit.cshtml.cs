@@ -1,26 +1,33 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SistemaAcademico.AccesoADatos;
+using SistemaAcademico.AccesoDatos;
 using SistemaAcademico.Data;
 using SistemaAcademico.Models;
+using SistemaAcademico.Repositorio;
+using SistemaAcademico.Services;
 
 namespace SistemaAcademico.Pages.Alumnos
 {
     public class EditModel : PageModel
     {
-        [BindProperty]
+		private readonly ServicioAlumno servicio;
+		public EditModel()
+		{
+			IAccesoDatos<Alumno> acceso = new AccesoDatosJson<Alumno>("Alumno");
+			IRepositorio<Alumno> repo = new RepositorioCrudJson<Alumno>(acceso);
+			servicio = new ServicioAlumno(repo);
+		}
+		[BindProperty]
         public Alumno Alumno { get; set; }
 
         public void OnGet(int id)
         {
-            foreach (var a in DatosCompartidos.Alumnos) 
+            Alumno? alumno = servicio.BuscarPorId(id);
+            if (alumno != null)
             {
-                if (a.Id == id)
-                {
-                    Alumno = a;
-                }
-
+				Alumno = alumno;
             }
-
         }
         public IActionResult OnPost() 
         {
@@ -28,15 +35,8 @@ namespace SistemaAcademico.Pages.Alumnos
             {
                 return Page();
             }
-            foreach (var a in DatosCompartidos.Alumnos)
-            {
-                a.Nombre = Alumno.Nombre;
-                a.Apellido = Alumno.Apellido;
-                a.Dni = Alumno.Dni;
-                a.Email = Alumno.Email;
-                a.FechaDeNacimiento = Alumno.FechaDeNacimiento;
-                break;
-            }
+            
+            servicio.Editar(Alumno);
             return RedirectToPage("Index");
 
         }

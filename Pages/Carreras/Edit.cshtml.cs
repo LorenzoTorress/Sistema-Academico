@@ -5,6 +5,9 @@ using SistemaAcademico.Data;
 using System.Security.Cryptography.X509Certificates;
 using SistemaAcademico.Helpers;
 using SistemaAcademico.Services;
+using SistemaAcademico.AccesoADatos;
+using SistemaAcademico.Repositorio;
+using SistemaAcademico.AccesoDatos;
 
 namespace SistemaAcademico.Pages.Carreras
 {
@@ -13,8 +16,10 @@ namespace SistemaAcademico.Pages.Carreras
         private readonly ServicesCareer servicio;
         public EditModel()
         {
-			servicio = new ServicesCareer();
-        }
+			IAccesoDatos<Carrera> acceso = new AccesoDatosJson<Carrera>("Carrera");
+			IRepositorio<Carrera> repo = new RepositorioCrudJson<Carrera>(acceso);
+			servicio = new ServicesCareer(repo);
+		}
         public List<string> Modalidad { get; set; } = new();
         [BindProperty]
         public Carrera? Carrera { get; set; }

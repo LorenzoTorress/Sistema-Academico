@@ -4,18 +4,17 @@ namespace SistemaAcademico.Models
 {
 	public class Alumno
 	{
-		[Required]
 		public int Id { get; set; }
-        [Required(ErrorMessage = "Casilla obligatoria")]
+
+        [Required(ErrorMessage = "El nombre no puede estar vacio")]
         public string? Nombre { get; set; }
-        [Required(ErrorMessage = "Casilla obligatoria")]
+        [Required(ErrorMessage = "El apellido no puede estar vacio")]
         public string? Apellido {  get; set; }
-        [Required(ErrorMessage = "Casilla obligatoria")]
-        [Range(8,8, ErrorMessage = "Faltan numeros en el DNI")]
+        [Required(ErrorMessage = "El Dni no puede estar vacio")]
         public string? Dni { get; set; }
-        [Required(ErrorMessage = "Casilla obligatoria")]
+        [Required(ErrorMessage = "El email no puede estar vacio")]
         public string? Email {  get; set; }
-        [Required(ErrorMessage = "Casilla obligatoria")]
+        [Required(ErrorMessage = "La fecha de nacimiento no puede estar vacia")]
         public int FechaDeNacimiento {  get; set; }
 	}
 }
