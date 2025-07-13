@@ -10,12 +10,12 @@ namespace SistemaAcademico.Models
         
         public string? Nombre { get; set; }
         [Required(ErrorMessage = "Casilla obligatoria")]
-        public int DuracionAnios { get; set; }
+		[Range(1, 7, ErrorMessage = "La duraciòn es entre 1 a 7 años")]
+		public int DuracionAnios { get; set; }
         [Required(ErrorMessage = "Casilla obligatoria")]
-        [Range(1,7 , ErrorMessage ="La duraciòn es entre 1 a 7 años")]
-        public string? TituloOtorgado { get; set; }
+		[StringLength(50, MinimumLength = 15, ErrorMessage = "El Titulo debe estar entre 15 y 50 caracteres")]
+		public string? TituloOtorgado { get; set; }
         [Required(ErrorMessage = "Casilla obligatoria")]
-        [StringLength(50 , MinimumLength = 15 , ErrorMessage ="El Titulo debe estar entre 15 y 50 caracteres")]
         public string? Modalidad { get; set; }
     }
 }

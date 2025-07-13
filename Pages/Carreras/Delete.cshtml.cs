@@ -31,13 +31,12 @@ namespace SistemaAcademico.Pages.Carreras
                 {
                     carreraAEliminar = c;
                 }
-                if (carreraAEliminar != null)
-                {
-                    DatosCompartidos.Carreras.Remove(carreraAEliminar);
-                }
             }
-                
-            return RedirectToPage("Index");
+			if (carreraAEliminar != null)
+			{
+				DatosCompartidos.Carreras.Remove(carreraAEliminar);
+			}
+			return RedirectToPage("Index");
         }
     }
 }

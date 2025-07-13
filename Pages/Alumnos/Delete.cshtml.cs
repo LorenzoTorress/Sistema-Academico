@@ -30,12 +30,13 @@ namespace SistemaAcademico.Pages.Alumnos
                 {
                     alumnoAEliminar = a;
                 }
-                if (alumnoAEliminar != null)
-                {
-                    DatosCompartidos.Alumnos.Remove(alumnoAEliminar);
-                }
+                
             }
-            return RedirectToPage("Index");
-        }
+			if (alumnoAEliminar != null)
+			{
+				DatosCompartidos.Alumnos.Remove(alumnoAEliminar);
+			}
+			return RedirectToPage("Index");
+        } 
     }
 }

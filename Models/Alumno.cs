@@ -6,16 +6,15 @@ namespace SistemaAcademico.Models
 	{
 		[Required]
 		public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Ingrese su nombre")]
         public string? Nombre { get; set; }
-        [Required(ErrorMessage = "Casilla obligatoria")]
+        [Required(ErrorMessage = "Ingrese su apellido")]
         public string? Apellido {  get; set; }
-        [Required(ErrorMessage = "Casilla obligatoria")]
-        public string? Dni { get; set; }
-        [Required(ErrorMessage = "Casilla obligatoria")]
-        [Range(8,8, ErrorMessage ="Faltan numeros en el DNI")]
+        [Required(ErrorMessage = "Ingrese un DNI")]
+		public string? Dni { get; set; }
+        [Required(ErrorMessage = "Ingrese un email")]
         public string? Email {  get; set; }
-        [Required(ErrorMessage = "Casilla obligatoria")]
+        [Required(ErrorMessage = "Ingrese una fecha de nacimiento")]
         public int FechaDeNacimiento {  get; set; }
 	}
 }
