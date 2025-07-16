@@ -14,7 +14,9 @@ namespace SistemaAcademico.Models
 		public string? Dni { get; set; }
         [Required(ErrorMessage = "Ingrese un email")]
         public string? Email {  get; set; }
+		[Display(Name = "Fecha de Nacimiento")]
+		[DataType(DataType.Date)]
         [Required(ErrorMessage = "Ingrese una fecha de nacimiento")]
-        public int FechaDeNacimiento {  get; set; }
+        public DateTime FechaDeNacimiento {  get; set; }
 	}
 }
