@@ -1,16 +1,1 @@
-[
-  {
-    "Id": 1,
-    "Nombre": "Ingeniería en Sistemas",
-    "DuracionAnios": 5,
-    "TituloOtorgado": "Ingeniero/a",
-    "Modalidad": "Presencial"
-  },
-  {
-    "Id": 2,
-    "Nombre": "Abogacía",
-    "DuracionAnios": 5,
-    "TituloOtorgado": "Abogado/a",
-    "Modalidad": "Hibrida"
-  }
-]
+[{"Id":1,"Nombre":"Analisis de Sistemas","DuracionAnios":4,"TituloOtorgado":"Tecnico Analista de Sistemas","Modalidad":"Hibrida"}]

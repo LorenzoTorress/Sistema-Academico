@@ -5,7 +5,7 @@ namespace SistemaAcademico.Services
 {
     public class ServicesCareer
     {
-        private static string ruta = "/Data/Career.json";
+        private static string ruta = "Data/Career.json";
         public static string LeerTextoDelArchivo()
         {
             if (File.Exists(ruta))

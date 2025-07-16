@@ -29,7 +29,6 @@ namespace SistemaAcademico.Pages.Carreras
                 return Page();
             }
 
-            Carrera.Id = ServicesCareer.ObtenerNuevoId(carreras); //Agregado para preguntar
             ServicesCareer.AgregarCarrera(Carrera);
             return RedirectToPage("/Carreras/Index");
         }
