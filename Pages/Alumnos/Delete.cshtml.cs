@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SistemaAcademico.Data;
 using SistemaAcademico.Models;
+using SistemaAcademico.Services;
 
 namespace SistemaAcademico.Pages.Alumnos
 {
@@ -10,31 +11,19 @@ namespace SistemaAcademico.Pages.Alumnos
         [BindProperty]
         public Alumno Alumno { get; set; }
 
-        public void OnGet(int id)
+        public IActionResult OnGet(int id)
         {
-            foreach (var a in DatosCompartidos.Alumnos)
-            {
-                if (a.Id == id)
-                {
-                    Alumno = a;
-                    break;
-                }
-            }
+            var alumno = ServicesStudent.BuscarPorId(id);
+            if (alumno == null)
+			{
+				return RedirectToPage("Index");
+			}
+			Alumno = alumno;
+			return Page();
         }
-        public IActionResult OnPost() 
+        public IActionResult OnPost(int id) 
         {
-            Alumno alumnoAEliminar = null;
-            foreach (var a in DatosCompartidos.Alumnos) 
-            {
-                if (a.Id == Alumno.Id)
-                {
-                    alumnoAEliminar = a;
-                }
-                if (alumnoAEliminar != null)
-                {
-                    DatosCompartidos.Alumnos.Remove(alumnoAEliminar);
-                }
-            }
+            ServicesStudent.EliminarPorId(id);
             return RedirectToPage("Index");
         }
     }

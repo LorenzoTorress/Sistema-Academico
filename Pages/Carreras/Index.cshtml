@@ -14,8 +14,8 @@ else
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
-                <th>Duracion</th>
-                <th>TituloOtorgado</th>
+                <th>Duracion años</th>
+                <th>Titulo Otorgado</th>
                 <th>Modalidad</th>
                 <th>Acciones</th>
             </tr>
@@ -26,12 +26,12 @@ else
                 <tr>
                     <td>@carrera.Id</td>
                     <td>@carrera.Nombre</td>
-                    <td>@carrera.Modalidad</td>
                     <td>@carrera.DuracionAnios</td>
                     <td>@carrera.TituloOtorgado</td>
+                    <td>@carrera.Modalidad</td>
                     <td>
-                        <a asp-page="Edit" asp-route-id="@carrera.Id" class="btn btn-warning btn-sm">Editar Alumno</a>
-                        <a asp-page="Delete" asp-route-id="@carrera.Id" class="btn btn-danger btn-sm">Eliminar Alumno</a>
+                        <a asp-page="Edit" asp-route-id="@carrera.Id" class="btn btn-warning btn-sm">Editar Carrera</a>
+                        <a asp-page="Delete" asp-route-id="@carrera.Id" class="btn btn-danger btn-sm">Eliminar Carrera</a>
                     </td>
                 </tr>
             }

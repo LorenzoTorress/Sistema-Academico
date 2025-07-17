@@ -6,7 +6,7 @@ namespace SistemaAcademico.Services
 {
 	public class ServicesStudent
 	{
-		private static string ruta = "/Data/Career.json";
+		private static string ruta = "Data/Student.json";
 		public static string LeerTextoDelArchivo()
 		{
 			if (File.Exists(ruta))
@@ -18,7 +18,6 @@ namespace SistemaAcademico.Services
 		public static List<Alumno> ObtenerAlumnos()
 		{
 			string json = LeerTextoDelArchivo();
-
 			var lista = JsonSerializer.Deserialize<List<Alumno>>(json);
 			return lista ?? new List<Alumno>();
 		}
@@ -62,7 +61,7 @@ namespace SistemaAcademico.Services
 				GuardarAlumnos(lista);
 			}
 		}
-		public static void EditarCarrera(Alumno alumnoEditado)
+		public static void EditarAlumno(Alumno alumnoEditado)
 		{
 			var lista = ObtenerAlumnos();
 			var alumno = BuscarAlumnosPorId(lista, alumnoEditado.Id);

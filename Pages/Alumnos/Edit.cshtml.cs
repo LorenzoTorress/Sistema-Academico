@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SistemaAcademico.Data;
 using SistemaAcademico.Models;
+using SistemaAcademico.Services;
 
 namespace SistemaAcademico.Pages.Alumnos
 {
@@ -12,15 +13,11 @@ namespace SistemaAcademico.Pages.Alumnos
 
         public void OnGet(int id)
         {
-            foreach (var a in DatosCompartidos.Alumnos) 
-            {
-                if (a.Id == id)
-                {
-                    Alumno = a;
-                }
-
-            }
-
+            Alumno? alumno = ServicesStudent.BuscarPorId(id);
+            if (alumno != null)
+			{
+				Alumno = alumno;
+			}
         }
         public IActionResult OnPost() 
         {
@@ -28,15 +25,8 @@ namespace SistemaAcademico.Pages.Alumnos
             {
                 return Page();
             }
-            foreach (var a in DatosCompartidos.Alumnos)
-            {
-                a.Nombre = Alumno.Nombre;
-                a.Apellido = Alumno.Apellido;
-                a.Dni = Alumno.Dni;
-                a.Email = Alumno.Email;
-                a.FechaDeNacimiento = Alumno.FechaDeNacimiento;
-                break;
-            }
+            ServicesStudent.EditarAlumno(Alumno);
+            
             return RedirectToPage("Index");
 
         }
